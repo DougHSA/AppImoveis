@@ -24,5 +24,51 @@ namespace AppImoveis.View
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            CarregarValores();
+        }
+
+        private void CarregarValores()
+        {
+            
+        }
+
+        private void onPesquisar(object sender, RoutedEventArgs e)
+        {
+            if (tb_Bairro.Text != "" && tb_Cidade.Text!= "" && tb_Estado.Text!="")
+            {
+                
+            }
+            else if (tb_Bairro.Text != "" && tb_Cidade.Text != "" && tb_Estado.Text == "")
+            {
+
+            }
+            else if (tb_Bairro.Text != "" && tb_Cidade.Text == "" && tb_Estado.Text != "")
+            {
+
+            }
+            else if (tb_Bairro.Text != "" && tb_Cidade.Text == "" && tb_Estado.Text == "")
+            {
+
+            }
+            else if (tb_Bairro.Text == "" && tb_Cidade.Text != "" && tb_Estado.Text != "")
+            {
+
+            }
+            else if (tb_Bairro.Text == "" && tb_Cidade.Text != "" && tb_Estado.Text == "")
+            {
+
+            }
+            else if (tb_Bairro.Text == "" && tb_Cidade.Text == "" && tb_Estado.Text != "")
+            {
+
+            }
+            else if (tb_Bairro.Text == "" && tb_Cidade.Text == "" && tb_Estado.Text == "")
+            {
+
+            }
+        }
     }
 }

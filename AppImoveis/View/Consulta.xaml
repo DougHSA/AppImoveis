@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AppImoveis.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1634">
+             d:DesignHeight="1000" d:DesignWidth="1634" Loaded="UserControl_Loaded">
     <Grid>
         <Viewbox>
             <Grid Height="1000" Width="1634">
@@ -31,15 +31,68 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="635*"/>
-                        <ColumnDefinition Width="184*"/>
+                        <ColumnDefinition Width="135*"/>
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30" IsReadOnly="True">
+                    <DataGrid x:Name="DataGrid1" Background="AliceBlue" Margin="10,30" Grid.Column="0">
 
+
+                        <ScrollBar x:Name="ScrollH" Orientation="Vertical" Width="20"/>
+
+
+
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="DeepSkyBlue"/>
+                                <Setter Property="FontSize" Value="25"/>
+                                <Setter Property="Height" Value="40"/>
+                                <Setter Property="Width" Value="165"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding}"></TextBlock>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </Style>
+
+
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="FontSize" Value="25"/>
+                                <Setter Property="Width" Value="165"/>
+                                <Setter Property="BorderThickness" Value="01"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontFamily" Value="Impact"/>
+                            </Style>
+
+                        </DataGrid.Resources>
+
+
+
+                        <DataGrid.Columns >
+
+                            <DataGridTextColumn Binding="{Binding Titulo}"  Header="Título" Foreground="Black" FontFamily="arial" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding CEP}" Header="CEP" Foreground="Black" FontFamily="arial" Width="auto" />
+                            <DataGridTextColumn Binding="{Binding Estado}"  Header="Estado" Foreground="Black" FontFamily="arial" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding Cidade}" Header="Cidade" Foreground="Black" FontFamily="arial" Width="auto" />
+                            <DataGridTextColumn Binding="{Binding Bairro}"  Header="Bairro" Foreground="Black" FontFamily="arial" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding Logradouro}" Header="Logradouro" Foreground="Black" FontFamily="arial" Width="auto" />
+                            <DataGridTextColumn Binding="{Binding Numero}"  Header="Número" Foreground="Black" FontFamily="arial" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding Complemento}" Header="Complemento" Foreground="Black" FontFamily="arial" Width="auto" />
+                        </DataGrid.Columns>
 
                     </DataGrid>
 
-                    <Grid Margin="10,30" Grid.Column="1">
+
+                    <Grid Margin="10,00" Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
@@ -55,7 +108,7 @@
                         <TextBox Grid.Row="3" Margin="30,10" x:Name="tb_Cidade"/>
                         <Label Grid.Row="4" Content="Bairro:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="50"/>
                         <TextBox Grid.Row="5" Margin="30,10" x:Name="tb_Bairro"/>
-                        <Button Grid.Row="6" Content="Pesquisar" Height="50" Width="200" FontSize="30"/>
+                        <Button Grid.Row="6" Content="Pesquisar" Height="50" Width="200" FontSize="30" Click="onPesquisar"/>
                     </Grid>
                 </Grid>
 

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppImoveis.API
+namespace AppImoveis.ViaCep
 {
     public class EnderecoCompleto
     {
@@ -19,11 +19,5 @@ namespace AppImoveis.API
         public string gia { get; set; }
         public string ddd { get; set; }
         public string siafi { get; set; }
-
-    }
-    class API
-    {
-        static HttpClient client = new HttpClient();
-
     }
 }

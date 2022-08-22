@@ -28,7 +28,7 @@ namespace AppImoveis
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new View.Cadastro());
+            GridPrincipal.Children.Add(new View.Aluguel());
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
