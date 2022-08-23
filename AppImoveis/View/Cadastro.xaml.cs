@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 
+
 namespace AppImoveis.View
 {
     /// <summary>
@@ -85,7 +86,7 @@ namespace AppImoveis.View
         {
             
             ViaCep.EnderecoCompleto endereco = new ViaCep.EnderecoCompleto();
-
+           
             endereco = await Services.ViaCepService.BuscarEndereco(cep.Replace("-", ""));
 
             tb_Bairro.Text = endereco.bairro;
