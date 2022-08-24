@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -93,6 +95,40 @@ namespace AppImoveis.View
             tb_Cidade.Text = endereco.localidade;
             tb_Log.Text = endereco.logradouro;
             tb_Estado.Text = endereco.uf;
+        }
+
+        private void onCadastrar(object sender, RoutedEventArgs e)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:5001/api/");
+            client.DefaultRequestHeaders
+                  .Accept
+                  .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "Imoveltbs");
+            Imoveltb imovel = new Imoveltb();
+
+            imovel.Alugado = 0;
+            imovel.Bairro = tb_Bairro.Text;
+            imovel.Cep = Convert.ToInt32(tb_CEP.Text.Replace("-", ""));
+            imovel.Cidade = tb_Cidade.Text;
+            imovel.Complemento = tb_Comp.Text;
+            imovel.Estado = tb_Estado.Text;
+            imovel.Numero = tb_Numero.Text;
+            imovel.Logradouro = tb_Log.Text;
+
+            string objectJson = JsonConvert.SerializeObject(imovel);
+
+            request.Content = new StringContent(objectJson,
+                                                Encoding.UTF8,
+                                                "application/json");//CONTENT-TYPE header
+            client.SendAsync(request)
+                 .ContinueWith(responseTask =>
+                 {
+                     Console.WriteLine("Response: {0}", responseTask.Result);
+                     MessageBox.Show(responseTask.Result.ReasonPhrase.ToString());
+                 });
+
         }
     }
 }

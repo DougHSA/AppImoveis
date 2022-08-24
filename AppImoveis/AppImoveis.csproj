@@ -64,6 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\ViaCep.cs" />
+    <Compile Include="Imoveltb.cs" />
     <Compile Include="Services\ViaCepService.cs" />
     <Compile Include="View\Alugar.xaml.cs">
       <DependentUpon>Alugar.xaml</DependentUpon>
