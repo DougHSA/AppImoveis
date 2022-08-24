@@ -36,6 +36,7 @@
                             <RowDefinition Height="10*"/>
                             <RowDefinition Height="10*"/>
                             <RowDefinition Height="10*"/>
+                            <RowDefinition Height="10*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="17*"/>
@@ -44,45 +45,56 @@
                         
                         
                         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                            <Label Content="Titulo do Imovel:" FontSize="40"/>
-                            <TextBox x:Name="tb_Titulo" FontSize="40" Width="631" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black"/>
+                            <Label Content="Nome do Proprietario:" FontSize="40"/>
+                            <TextBox x:Name="tb_NomeProp" FontSize="40" Width="531" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                            <Label Content="CEP:" Width="163" FontSize="40" Margin="20,0,20,0"/>
-                            <TextBox x:Name="tb_CEP" FontSize="40" Width="200" BorderThickness="2" BorderBrush="Black" TextChanged="tb_CEP_TextChanged" />
+                            <Label Content="CPF:" Width="163" FontSize="40" Margin="20,0,20,0"/>
+                            <TextBox x:Name="tb_CPF" FontSize="40" Width="200" BorderThickness="2" BorderBrush="Black"/>
                         </StackPanel>
-                        
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                            <Label Content="Email:" FontSize="40"/>
+                            <TextBox x:Name="tb_Email" FontSize="40" Width="531" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Label Content="Telefone:" Width="163" FontSize="40" Margin="20,0,20,0"/>
+                            <TextBox x:Name="tb_Telefone" FontSize="40" Width="200" BorderThickness="2" BorderBrush="Black" TextChanged="tb_CEP_TextChanged" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+                            <Label Content="CEP:" FontSize="40" Margin="0,0,20,0"/>
+                            <TextBox x:Name="tb_CEP" FontSize="40" Width="200" Margin="0,0,20,0" BorderThickness="2" BorderBrush="Black" TextChanged="tb_CEP_TextChanged" />
                             <Label Content="Estado:" FontSize="40"/>
-                            <TextBox x:Name="tb_Estado" FontSize="40" Width="100" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
-                            <Label Content="Cidade:" FontSize="40" Margin="40,0,20,0"/>
-                            <TextBox x:Name="tb_Cidade" FontSize="40" Width="500" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
-                            
+                            <TextBox x:Name="tb_Estado" FontSize="40" Width="80" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
+                            <Label Content="Cidade:" FontSize="40" Margin="20,0,20,0"/>
+                            <TextBox x:Name="tb_Cidade" FontSize="40" Width="335" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
+                            <Label Content="Bairro:" FontSize="40" Margin="20,0,20,0"/>
+                            <TextBox x:Name="tb_Bairro" FontSize="40" Width="300" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                            <Label Content="Bairro:" Width="163" FontSize="40" Margin="20,0,20,0"/>
-                            <TextBox x:Name="tb_Bairro" FontSize="40" Width="360" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
+                            
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                             <Label Content="Logradouro:" FontSize="40"/>
                             <TextBox x:Name="tb_Log" FontSize="40" Width="714" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black" IsReadOnly="True" Background="LightGray"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                             <Label Content="Número:" Width="163" FontSize="40" Margin="20,0,20,0"/>
                             <TextBox x:Name="tb_Numero" FontSize="40" Width="150" BorderThickness="2" BorderBrush="Black"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                             <Label Content="Complemento:" FontSize="40"/>
                             <TextBox x:Name="tb_Comp" FontSize="40" Width="671" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Black"/>
 
                         </StackPanel>
 
-                        <Button Grid.Row="4" Content="Cadastrar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="500" FontSize="40" Grid.ColumnSpan="2" Click="onCadastrar"/>
+                        <Button Grid.Row="5" Content="Cadastrar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="500" FontSize="40" Grid.ColumnSpan="2" Click="onCadastrar"/>
                     </Grid>
 
                    

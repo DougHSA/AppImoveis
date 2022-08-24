@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,12 +29,48 @@ namespace AppImoveis.View
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            CarregarValores();
+            CarregarTabela();
+           
         }
 
-        private void CarregarValores()
+        private void CarregarTabela()
         {
-            
+            _ = CarregarValoresAsync();
+        }
+
+        private async Task CarregarValoresAsync()
+        {
+            HttpClient Client = new HttpClient();
+            Client.BaseAddress = new Uri("https://localhost:5001/api/");
+            HttpResponseMessage Response = await Client.GetAsync("Imoveltbs");
+            Imoveltb Imovel = new Imoveltb();
+
+            if (Response.IsSuccessStatusCode)
+            {
+                string Json = await Response.Content.ReadAsStringAsync();
+                var teste = JsonConvert.DeserializeObject< List<Imoveltb>>(Json);
+                //var teste = JsonConvert.DeserializeObject<Dictionary<string, List<Imoveltb>>>(Json);
+                List<Imoveltb> ListaImoveis = teste.ToList();
+                DataGrid1.Items.Clear();
+                foreach(var item in ListaImoveis)
+                {
+                    DataGrid1.Items.Add(new
+                    {
+                        CEP = item.Cep,
+                        Estado = item.Estado,
+                        Cidade = item.Cidade,
+                        Bairro = item.Bairro,
+                        Logradouro = item.Logradouro,
+                        Numero = item.Numero,
+                        Complemento = item.Complemento
+                    }) ;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+
         }
 
         private void onPesquisar(object sender, RoutedEventArgs e)

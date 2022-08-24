@@ -30,7 +30,7 @@ namespace ApiImoveis.Controllers
 
         // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        public async Task<ActionResult<Cliente>> GetCliente(long id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace ApiImoveis.Controllers
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        public async Task<IActionResult> PutCliente(long id, Cliente cliente)
         {
             if (id != cliente.Cpf)
             {
@@ -100,7 +100,7 @@ namespace ApiImoveis.Controllers
 
         // DELETE: api/Clientes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCliente(int id)
+        public async Task<IActionResult> DeleteCliente(long id)
         {
             var cliente = await _context.Clientes.FindAsync(id);
             if (cliente == null)
@@ -114,7 +114,7 @@ namespace ApiImoveis.Controllers
             return NoContent();
         }
 
-        private bool ClienteExists(int id)
+        private bool ClienteExists(long id)
         {
             return _context.Clientes.Any(e => e.Cpf == id);
         }

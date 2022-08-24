@@ -82,7 +82,7 @@ namespace AppImoveis
 
     public void logOff()
     {
-        //client.Dispose();
+        //Client.Dispose();
         this.Close();
 
     }

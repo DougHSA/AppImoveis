@@ -33,18 +33,18 @@ namespace AppImoveis.View
 
         private void tb_CEP_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox cep = (TextBox)sender;
+            TextBox Cep = (TextBox)sender;
 
 
-            if (cep.Text.Length == 9)
+            if (Cep.Text.Length == 9)
             {
-                if (cep.Text.Contains("-"))
+                if (Cep.Text.Contains("-"))
                 {
                     int validacao1, validacao2;
-                    if (int.TryParse(cep.Text.Substring(0, 5), out validacao1) && int.TryParse(cep.Text.Substring(6, 3), out validacao2))
+                    if (int.TryParse(Cep.Text.Substring(0, 5), out validacao1) && int.TryParse(Cep.Text.Substring(6, 3), out validacao2))
                     {
                         
-                        CarregarEndereco(cep.Text);
+                        CarregarEndereco(Cep.Text);
                         CEPok = true;
                         
                     }
@@ -63,72 +63,102 @@ namespace AppImoveis.View
                 tb_Log.Text = "";
                 tb_Estado.Text = "";
 
-                if(cep.Text.Length == 5)
+                if(Cep.Text.Length == 5)
                 {
-                    cep.Text = cep.Text.Substring(0, 5) + "-";
-                    cep.CaretIndex = cep.Text.Length;
+                    Cep.Text = Cep.Text.Substring(0, 5) + "-";
+                    Cep.CaretIndex = Cep.Text.Length;
                 }
-                else if (cep.Text.Length > 5)
+                else if (Cep.Text.Length > 5)
                 {
-                    if (!cep.Text.Contains("-"))
+                    if (!Cep.Text.Contains("-"))
                     {
-                            cep.Text = cep.Text.Substring(0, 5) + "-" + cep.Text.Substring(5, cep.Text.Length-5);
-                            cep.CaretIndex = cep.Text.Length;
+                            Cep.Text = Cep.Text.Substring(0, 5) + "-" + Cep.Text.Substring(5, Cep.Text.Length-5);
+                            Cep.CaretIndex = Cep.Text.Length;
                     }
                 }
-                else if (cep.Text.Length > 9)
+                else if (Cep.Text.Length > 9)
                 {
-                    cep.Text = cep.Text.Substring(0, 9);
-                    cep.CaretIndex = cep.Text.Length;
+                    Cep.Text = Cep.Text.Substring(0, 9);
+                    Cep.CaretIndex = Cep.Text.Length;
                 }
             }
         }
 
-        private async void  CarregarEndereco(string cep)
+        private async void  CarregarEndereco(string Cep)
         {
             
-            ViaCep.EnderecoCompleto endereco = new ViaCep.EnderecoCompleto();
+            EnderecoCompleto Endereco = new EnderecoCompleto();
            
-            endereco = await Services.ViaCepService.BuscarEndereco(cep.Replace("-", ""));
+            Endereco = await ViaCepAPI.BuscarEndereco(Cep.Replace("-", ""));
 
-            tb_Bairro.Text = endereco.bairro;
-            tb_Cidade.Text = endereco.localidade;
-            tb_Log.Text = endereco.logradouro;
-            tb_Estado.Text = endereco.uf;
+            tb_Bairro.Text = Endereco.bairro;
+            tb_Cidade.Text = Endereco.localidade;
+            tb_Log.Text = Endereco.logradouro;
+            tb_Estado.Text = Endereco.uf;
         }
+
+        public static Task<HttpResponseMessage> resposta;
 
         private void onCadastrar(object sender, RoutedEventArgs e)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:5001/api/");
-            client.DefaultRequestHeaders
+            HttpClient Client = new HttpClient();
+            Client.BaseAddress = new Uri("https://localhost:5001/api/");
+            Client.DefaultRequestHeaders
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "Imoveltbs");
-            Imoveltb imovel = new Imoveltb();
+            HttpRequestMessage RequestImovel = new HttpRequestMessage(HttpMethod.Post, "Imoveltbs");
+            HttpRequestMessage RequestCliente = new HttpRequestMessage(HttpMethod.Post, "Clientes");
+            HttpRequestMessage RequestProp = new HttpRequestMessage(HttpMethod.Post, "Proprietarios");
 
-            imovel.Alugado = 0;
-            imovel.Bairro = tb_Bairro.Text;
-            imovel.Cep = Convert.ToInt32(tb_CEP.Text.Replace("-", ""));
-            imovel.Cidade = tb_Cidade.Text;
-            imovel.Complemento = tb_Comp.Text;
-            imovel.Estado = tb_Estado.Text;
-            imovel.Numero = tb_Numero.Text;
-            imovel.Logradouro = tb_Log.Text;
+            Imoveltb Imovel = new Imoveltb();
+            Cliente Pessoa = new Cliente();
+            Proprietario Prop = new Proprietario();
 
-            string objectJson = JsonConvert.SerializeObject(imovel);
 
-            request.Content = new StringContent(objectJson,
+            Imovel.Alugado = 0;
+            Imovel.Bairro = tb_Bairro.Text;
+            Imovel.Cep = Convert.ToInt32(tb_CEP.Text.Replace("-", ""));
+            Imovel.Cidade = tb_Cidade.Text;
+            Imovel.Complemento = tb_Comp.Text;
+            Imovel.Estado = tb_Estado.Text;
+            Imovel.Numero = tb_Numero.Text;
+            Imovel.Logradouro = tb_Log.Text;
+
+            Pessoa.Cpf =Convert.ToInt64(tb_CPF.Text.Replace(".", "").Replace("-", ""));
+            Pessoa.Email = tb_Email.Text;
+            Pessoa.Nome = tb_NomeProp.Text;
+            Pessoa.Telefone = tb_Telefone.Text;
+
+            //Prop.Cpf = Pessoa.Cpf;
+            
+
+
+
+            string ImovelJson = JsonConvert.SerializeObject(Imovel);
+            string PessoaJson = JsonConvert.SerializeObject(Pessoa);
+
+            RequestImovel.Content = new StringContent(ImovelJson,
                                                 Encoding.UTF8,
-                                                "application/json");//CONTENT-TYPE header
-            client.SendAsync(request)
+                                                "application/json");
+            RequestCliente.Content = new StringContent(PessoaJson,
+                                                Encoding.UTF8,
+                                                "application/json");
+           
+
+            Client.SendAsync(RequestImovel)
                  .ContinueWith(responseTask =>
                  {
                      Console.WriteLine("Response: {0}", responseTask.Result);
-                     MessageBox.Show(responseTask.Result.ReasonPhrase.ToString());
+                     MessageBox.Show(responseTask.Result.ToString());
+                     resposta = responseTask;
                  });
-
+            Client.SendAsync(RequestCliente)
+                 .ContinueWith(responseTask =>
+                 {
+                     Console.WriteLine("Response: {0}", responseTask.Result);
+                     MessageBox.Show(responseTask.ToString());
+                 });
         }
     }
 }

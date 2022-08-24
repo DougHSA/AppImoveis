@@ -66,9 +66,7 @@ namespace ApiImoveis.Data
                 entity.HasIndex(e => e.IdImovel, "idImovel_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.IdImovel)
-                    .ValueGeneratedNever()
-                    .HasColumnName("idImovel");
+                entity.Property(e => e.IdImovel).HasColumnName("idImovel");
 
                 entity.Property(e => e.Bairro)
                     .IsRequired()
@@ -107,9 +105,7 @@ namespace ApiImoveis.Data
                 entity.HasIndex(e => e.IdLocacao, "idLocacao_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.IdLocacao)
-                    .ValueGeneratedNever()
-                    .HasColumnName("idLocacao");
+                entity.Property(e => e.IdLocacao).HasColumnName("idLocacao");
 
                 entity.Property(e => e.Cpflocatario).HasColumnName("CPFLocatario");
             });
@@ -124,9 +120,7 @@ namespace ApiImoveis.Data
                 entity.HasIndex(e => e.IdProprietario, "CPF_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.IdProprietario)
-                    .ValueGeneratedNever()
-                    .HasColumnName("idProprietario");
+                entity.Property(e => e.IdProprietario).HasColumnName("idProprietario");
 
                 entity.Property(e => e.Cpf).HasColumnName("CPF");
 

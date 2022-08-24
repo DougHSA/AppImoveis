@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
 
-namespace ApiImoveis.Models
+namespace AppImoveis
 {
-    public partial class Cliente
+    public  class Cliente
     {
         public long Cpf { get; set; }
         public string Nome { get; set; }

@@ -79,21 +79,7 @@ namespace ApiImoveis.Controllers
         public async Task<ActionResult<Proprietario>> PostProprietario(Proprietario proprietario)
         {
             _context.Proprietarios.Add(proprietario);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ProprietarioExists(proprietario.IdProprietario))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProprietario", new { id = proprietario.IdProprietario }, proprietario);
         }

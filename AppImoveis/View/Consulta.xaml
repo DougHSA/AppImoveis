@@ -79,7 +79,6 @@
 
                         <DataGrid.Columns >
 
-                            <DataGridTextColumn Binding="{Binding Titulo}"  Header="Título" Foreground="Black" FontFamily="arial" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding CEP}" Header="CEP" Foreground="Black" FontFamily="arial" Width="auto" />
                             <DataGridTextColumn Binding="{Binding Estado}"  Header="Estado" Foreground="Black" FontFamily="arial" Width="auto"/>
                             <DataGridTextColumn Binding="{Binding Cidade}" Header="Cidade" Foreground="Black" FontFamily="arial" Width="auto" />

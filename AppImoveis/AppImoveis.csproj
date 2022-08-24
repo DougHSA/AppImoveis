@@ -63,9 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\ViaCep.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Proprietario.cs" />
+    <Compile Include="ViaCep.cs" />
     <Compile Include="Imoveltb.cs" />
-    <Compile Include="Services\ViaCepService.cs" />
+    <Compile Include="ViaCepAPI.cs" />
     <Compile Include="View\Alugar.xaml.cs">
       <DependentUpon>Alugar.xaml</DependentUpon>
     </Compile>

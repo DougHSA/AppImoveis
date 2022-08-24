@@ -79,21 +79,7 @@ namespace ApiImoveis.Controllers
         public async Task<ActionResult<Imoveltb>> PostImoveltb(Imoveltb imoveltb)
         {
             _context.Imoveltbs.Add(imoveltb);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ImoveltbExists(imoveltb.IdImovel))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetImoveltb", new { id = imoveltb.IdImovel }, imoveltb);
         }

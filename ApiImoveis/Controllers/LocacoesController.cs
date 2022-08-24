@@ -79,21 +79,7 @@ namespace ApiImoveis.Controllers
         public async Task<ActionResult<Locacao>> PostLocacao(Locacao locacao)
         {
             _context.Locacaos.Add(locacao);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (LocacaoExists(locacao.IdLocacao))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetLocacao", new { id = locacao.IdLocacao }, locacao);
         }
