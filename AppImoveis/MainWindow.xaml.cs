@@ -58,15 +58,14 @@ namespace AppImoveis
 
                     case 3:
                         GridPrincipal.Children.Clear();
-                        //GridPrincipal.Children.Add(new Limites());
+                        GridPrincipal.Children.Add(new View.Remover());
 
                         break;
 
 
                     case 4:
                         GridPrincipal.Children.Clear();
-                        //GridPrincipal.Children.Add(new Login(3));
-                        //GridPrincipal.Children.Add(new MenuBD());
+                        GridPrincipal.Children.Add(new View.Alterar());
 
                         break;
 

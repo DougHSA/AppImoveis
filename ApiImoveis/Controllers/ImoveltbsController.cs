@@ -28,8 +28,8 @@ namespace ApiImoveis.Controllers
             return await _context.Imoveltbs.ToListAsync();
         }
 
-        // GET: api/Imoveltbs/5
-        [HttpGet("{id}")]
+        // GET: api/Imoveltbs/id/5
+        [HttpGet("id/{id}")]
         public async Task<ActionResult<Imoveltb>> GetImoveltb(int id)
         {
             var imoveltb = await _context.Imoveltbs.FindAsync(id);
@@ -40,6 +40,62 @@ namespace ApiImoveis.Controllers
             }
 
             return imoveltb;
+        }
+
+        // GET: api/Imoveltbs/cidade
+        [HttpGet("cidade/{cidade}")]
+        public ActionResult<Imoveltb> GetImoveltbcidade(string cidade)
+        {
+            var imoveltb = (from imovel in _context.Imoveltbs where imovel.Cidade.Equals(cidade) select imovel).ToList();
+
+            if (imoveltb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(imoveltb);
+        }
+
+        // GET: api/Imoveltbs/estado
+        [HttpGet("estado/{estado}")]
+        public ActionResult<Imoveltb> GetImoveltbestado(string estado)
+        {
+            var imoveltb = (from imovel in _context.Imoveltbs where imovel.Estado.Equals(estado) select imovel).ToList();
+
+            if (imoveltb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(imoveltb);
+        }
+
+        // GET: api/Imoveltbs/bairro
+        [HttpGet("bairro/{bairro}")]
+        public ActionResult<Imoveltb> GetImoveltbbairro(string bairro)
+        {
+            var imoveltb = (from imovel in _context.Imoveltbs where imovel.Bairro.Equals(bairro) select imovel).ToList();
+
+            if (imoveltb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(imoveltb);
+        }
+
+        // GET: api/Imoveltbs/cep
+        [HttpGet("cep/{cep}")]
+        public ActionResult<Imoveltb> GetImoveltbcep(int cep)
+        {
+            var imoveltb = (from imovel in _context.Imoveltbs where imovel.Cep.Equals(cep) select imovel).ToList();
+
+            if (imoveltb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(imoveltb);
         }
 
         // PUT: api/Imoveltbs/5
@@ -84,8 +140,8 @@ namespace ApiImoveis.Controllers
             return CreatedAtAction("GetImoveltb", new { id = imoveltb.IdImovel }, imoveltb);
         }
 
-        // DELETE: api/Imoveltbs/5
-        [HttpDelete("{id}")]
+        // DELETE: api/Imoveltbs/id/5
+        [HttpDelete("id/{id}")]
         public async Task<IActionResult> DeleteImoveltb(int id)
         {
             var imoveltb = await _context.Imoveltbs.FindAsync(id);
@@ -94,6 +150,21 @@ namespace ApiImoveis.Controllers
                 return NotFound();
             }
 
+            _context.Imoveltbs.Remove(imoveltb);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Imoveltbs/cep/11111111/num/1111
+        [HttpDelete("cep/{cep}/num/{num}")]
+        public async Task<IActionResult> DeleteImoveltbCompleto(int cep,string num)
+        {
+            var imoveltb = _context.Imoveltbs.Where(x => x.Cep == cep && x.Numero.Equals(num)).FirstOrDefault();
+            if (imoveltb == null)
+            {
+                return NotFound();
+            }
             _context.Imoveltbs.Remove(imoveltb);
             await _context.SaveChangesAsync();
 

@@ -48,9 +48,9 @@ namespace AppImoveis.View
             if (Response.IsSuccessStatusCode)
             {
                 string Json = await Response.Content.ReadAsStringAsync();
-                var teste = JsonConvert.DeserializeObject< List<Imoveltb>>(Json);
+                var lista = JsonConvert.DeserializeObject< List<Imoveltb>>(Json);
                 //var teste = JsonConvert.DeserializeObject<Dictionary<string, List<Imoveltb>>>(Json);
-                List<Imoveltb> ListaImoveis = teste.ToList();
+                List<Imoveltb> ListaImoveis = lista.ToList();
                 DataGrid1.Items.Clear();
                 foreach(var item in ListaImoveis)
                 {
@@ -75,38 +75,71 @@ namespace AppImoveis.View
 
         private void onPesquisar(object sender, RoutedEventArgs e)
         {
-            if (tb_Bairro.Text != "" && tb_Cidade.Text!= "" && tb_Estado.Text!="")
+            if (tb_Bairro.Text != "" )
             {
-                
+                FiltroAsync("bairro",tb_Bairro.Text);
             }
-            else if (tb_Bairro.Text != "" && tb_Cidade.Text != "" && tb_Estado.Text == "")
+            else if (tb_Cidade.Text != "")
             {
+                FiltroAsync("cidade", tb_Cidade.Text);
+            }
+            else if (tb_Estado.Text != "")
+            {
+                FiltroAsync("estado", tb_Estado.Text);
+            }
+            
+        }
 
-            }
-            else if (tb_Bairro.Text != "" && tb_Cidade.Text == "" && tb_Estado.Text != "")
-            {
+        private async void FiltroAsync(string filtro,string valor)
+        {
+            HttpClient Client = new HttpClient();
+            Client.BaseAddress = new Uri("https://localhost:5001/api/");
+            HttpResponseMessage Response = await Client.GetAsync($"Imoveltbs/{filtro}/{valor}");
 
-            }
-            else if (tb_Bairro.Text != "" && tb_Cidade.Text == "" && tb_Estado.Text == "")
+            if (Response.IsSuccessStatusCode)
             {
-
+                string Json = await Response.Content.ReadAsStringAsync();
+                var lista = JsonConvert.DeserializeObject<List<Imoveltb>>(Json);
+                //var teste = JsonConvert.DeserializeObject<Dictionary<string, List<Imoveltb>>>(Json);
+                List<Imoveltb> ListaImoveis = lista.ToList();
+                DataGrid1.Items.Clear();
+                foreach (var item in ListaImoveis)
+                {
+                    DataGrid1.Items.Add(new
+                    {
+                        CEP = item.Cep,
+                        Estado = item.Estado,
+                        Cidade = item.Cidade,
+                        Bairro = item.Bairro,
+                        Logradouro = item.Logradouro,
+                        Numero = item.Numero,
+                        Complemento = item.Complemento
+                    });
+                }
             }
-            else if (tb_Bairro.Text == "" && tb_Cidade.Text != "" && tb_Estado.Text != "")
+            else
             {
-
+                MessageBox.Show("Error");
             }
-            else if (tb_Bairro.Text == "" && tb_Cidade.Text != "" && tb_Estado.Text == "")
-            {
+        }
 
-            }
-            else if (tb_Bairro.Text == "" && tb_Cidade.Text == "" && tb_Estado.Text != "")
-            {
+        private void tb_Estado_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tb_Cidade.Text = "";
+            tb_Bairro.Text = "";
+        }
 
-            }
-            else if (tb_Bairro.Text == "" && tb_Cidade.Text == "" && tb_Estado.Text == "")
-            {
+        private void tb_Cidade_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tb_Bairro.Text = "";
+            tb_Estado.Text = "";
+        }
 
-            }
+        private void tb_Bairro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tb_Cidade.Text = "";
+            tb_Estado.Text = "";
+
         }
     }
 }

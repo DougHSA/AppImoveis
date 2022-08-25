@@ -159,6 +159,17 @@ namespace AppImoveis.View
                      Console.WriteLine("Response: {0}", responseTask.Result);
                      MessageBox.Show(responseTask.ToString());
                  });
+            tb_Bairro.Text = "";
+            tb_Cidade.Text = "";
+            tb_Log.Text = "";
+            tb_Estado.Text = "";
+            tb_CPF.Text = "";
+            tb_Email.Text = "";
+            tb_NomeProp.Text = "";
+            tb_Telefone.Text = "";
+            tb_CEP.Text = "";
+            tb_Comp.Text = "";
+            tb_Numero.Text = "";
         }
     }
 }

@@ -71,6 +71,12 @@
     <Compile Include="View\Alugar.xaml.cs">
       <DependentUpon>Alugar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Alterar.xaml.cs">
+      <DependentUpon>Alterar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Remover .xaml.cs">
+      <DependentUpon>Remover .xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Consulta.xaml.cs">
       <DependentUpon>Consulta.xaml</DependentUpon>
     </Compile>
@@ -90,6 +96,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Alugar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Alterar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Remover .xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -102,11 +102,11 @@
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="Estado:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="50"/>
-                        <TextBox Grid.Row="1" Margin="30,10" x:Name="tb_Estado"/>
+                        <TextBox Grid.Row="1" Margin="30,10" x:Name="tb_Estado" TextChanged="tb_Estado_TextChanged" FontSize="25"/>
                         <Label Grid.Row="2" Content="Cidade:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="50"/>
-                        <TextBox Grid.Row="3" Margin="30,10" x:Name="tb_Cidade"/>
+                        <TextBox Grid.Row="3" Margin="30,10" x:Name="tb_Cidade" TextChanged="tb_Cidade_TextChanged" FontSize="25"/>
                         <Label Grid.Row="4" Content="Bairro:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="50"/>
-                        <TextBox Grid.Row="5" Margin="30,10" x:Name="tb_Bairro"/>
+                        <TextBox Grid.Row="5" Margin="30,10" x:Name="tb_Bairro" TextChanged="tb_Bairro_TextChanged" FontSize="25"/>
                         <Button Grid.Row="6" Content="Pesquisar" Height="50" Width="200" FontSize="30" Click="onPesquisar"/>
                     </Grid>
                 </Grid>

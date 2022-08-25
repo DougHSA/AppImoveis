@@ -6,6 +6,7 @@ namespace AppImoveis
 {
     public class Imoveltb
     {
+        public int idImovel { get; set; }
         public int Cep { get; set; }
         public string Estado { get; set; }
         public string Cidade { get; set; }
