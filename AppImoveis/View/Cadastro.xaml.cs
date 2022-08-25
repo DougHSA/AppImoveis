@@ -150,14 +150,15 @@ namespace AppImoveis.View
                  .ContinueWith(responseTask =>
                  {
                      Console.WriteLine("Response: {0}", responseTask.Result);
-                     MessageBox.Show(responseTask.Result.ToString());
-                     resposta = responseTask;
+                     if(responseTask.Result.IsSuccessStatusCode)
+                     MessageBox.Show("Imovel criado com sucesso");
                  });
             Client.SendAsync(RequestCliente)
                  .ContinueWith(responseTask =>
                  {
                      Console.WriteLine("Response: {0}", responseTask.Result);
-                     MessageBox.Show(responseTask.ToString());
+                     if (responseTask.Result.IsSuccessStatusCode)
+                         MessageBox.Show("Cliente criado com sucesso");
                  });
             tb_Bairro.Text = "";
             tb_Cidade.Text = "";
